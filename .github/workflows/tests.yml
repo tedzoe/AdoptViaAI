@@ -10,6 +10,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      # Provide a dummy key at job level so config/settings.py imports
+      # succeed across all steps without a real .env file.
+      ANTHROPIC_API_KEY: "sk-ant-test-key-for-ci"
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -23,8 +28,4 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run pytest
-        env:
-          # Tests that import config/settings.py call load_dotenv; provide a
-          # dummy key so the import succeeds without a real .env file.
-          ANTHROPIC_API_KEY: "sk-ant-test-key-for-ci"
         run: pytest tests/ -v --tb=short

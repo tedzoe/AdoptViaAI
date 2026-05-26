@@ -310,9 +310,9 @@ def get_project_info_handler(inputs: dict) -> dict:
             "version",
         ],
         "models_available": {
-            "haiku":  "claude-haiku-4-5 (default, cheapest)",
-            "sonnet": "claude-sonnet-4-6",
-            "opus":   "claude-opus-4-6",
+            "haiku":  "claude-haiku-4-5-20251001 (default, cheapest)",
+            "sonnet": "claude-sonnet-4-20250514",
+            "opus":   "claude-opus-4-20250514",
         },
         "tools_available": [
             "calculator",

@@ -175,7 +175,7 @@ $env:AVAI_MAX_USD = "0.50"
 # macOS / Linux:
 # export AVAI_MAX_USD=0.50
 
-# Set a 20 requests-per-minute rate limit (default: 30)
+# Set a 20 requests-per-minute rate limit (default: 60)
 $env:AVAI_MAX_RPM = "20"
 
 # Check current budget status
