@@ -85,9 +85,11 @@ class TestTokenEstimate:
         assert estimate == 100  # 400 chars / 4
 
     def test_estimate_handles_list_content(self):
+        # get_token_estimate sums len(str(block["text"])) for list content, then // 4
+        # {"text": "a" * 200} → 200 chars → 200 // 4 = 50 tokens
         self.mgr.add_message("assistant", [{"text": "a" * 200}])
         estimate = self.mgr.get_token_estimate()
-        assert estimate >= 0  # should not raise
+        assert estimate == 50
 
 
 class TestSummarizeIfNeeded:

@@ -112,13 +112,18 @@ class TestCostTrackerWarnThreshold:
         usage.cache_read_input_tokens = 0
         return usage
 
-    def test_warn_below_threshold_does_nothing(self):
+    def test_warn_below_threshold_does_not_print(self):
+        # 100 output tokens of haiku ≈ $0.0000004 — far below a $10 threshold
         with patch.object(self.tracker, "_log_api_call"):
             self.tracker.add_call(self._make_usage(output=100), "haiku")
-        # $0.00040 is well below $10 threshold — no output expected
-        self.tracker.warn_if_over_threshold(10.0)  # should not raise
+        with patch("core.cost_tracker.console") as mock_console:
+            self.tracker.warn_if_over_threshold(10.0)
+            mock_console.print.assert_not_called()
 
-    def test_warn_above_threshold_does_not_raise(self):
+    def test_warn_above_threshold_prints_warning(self):
+        # 10M output tokens of opus ≈ $750 — far above a $0.01 threshold
         with patch.object(self.tracker, "_log_api_call"):
             self.tracker.add_call(self._make_usage(output=10_000_000), "opus")
-        self.tracker.warn_if_over_threshold(0.01)  # should not raise
+        with patch("core.cost_tracker.console") as mock_console:
+            self.tracker.warn_if_over_threshold(0.01)
+            mock_console.print.assert_called_once()

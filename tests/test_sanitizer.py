@@ -28,6 +28,9 @@ class TestSanitizeCleanInput:
     def test_empty_string_passes(self):
         result = sanitize("")
         assert result.safe is True
+        assert result.text == ""
+        assert result.warnings == []
+        assert result.blocked_reason == ""
 
 
 class TestSanitizeInjectionPatterns:
