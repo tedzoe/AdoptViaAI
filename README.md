@@ -6,6 +6,22 @@
 
 ---
 
+## Why This Project Matters
+
+Most Claude API tutorials stop at "send a message, get a reply." AdoptviaAI goes further — it demonstrates the patterns that actually matter in production:
+
+- **Multi-turn chat with persistent history** — the Messages API is stateless; `ConversationManager` provides the statefulness that makes real conversations possible
+- **Prompt caching** — system prompts are marked with `cache_control` so repeated calls pay ~10% of normal input token cost after the first turn
+- **Tool use & agentic loops** — `ToolExecutor` handles the `stop_reason == "tool_use"` detect → dispatch → re-inject cycle, including an AST-safe calculator that never calls `eval()`
+- **Multi-agent orchestration** — `ResearchAgent`, `WriterAgent`, and `OrchestratorAgent` show how to decompose complex goals across specialist roles
+- **Model Context Protocol (MCP)** — a FastMCP server exposes tools and resources over stdio; a hand-rolled JSON-RPC client connects to it without relying on the pip `mcp` package being importable alongside the local `mcp/` directory
+- **Cost tracking** — every API call logs all four token types (`input`, `output`, `cache_creation`, `cache_read`) with per-model pricing to a CSV, so you can see the caching strategy paying off in real numbers
+- **Safety guardrails** — layered defences: input sanitization (injection + secret detection), output filtering (PII redaction), budget enforcement (pre-call USD cap + RPM limit), and an append-only audit log
+
+This is a CCA-F certification portfolio project — every module is commented with the domain it demonstrates so the mapping from code to exam objective is explicit.
+
+---
+
 ## Quick Start
 
 ### Prerequisites
