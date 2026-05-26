@@ -14,7 +14,9 @@ All five phases are complete and the polish pass is done. The project is present
 
 ## Current State
 
-**All five phases complete + polish pass complete.**
+**All five phases complete + polish pass complete. Project published to GitHub.**
+
+Repository: https://github.com/tedzoe/AdoptViaAI.git
 
 ```
 Phase 1 -- chat, ask, summary, models, prompts            DONE
@@ -74,7 +76,16 @@ avai safety audit
 
 ## Recent Changes (newest first)
 
-### Polish pass (this session)
+### Git init + publish (this session, 2026-05-24)
+
+- Security audit: confirmed `.env` contained a real `sk-ant-api03-...` key (since replaced
+  with placeholder); no git history risk because no `.git` existed yet
+- Confirmed `.env` is listed in `.gitignore` and `.env.example` contains only placeholder
+- Ran `git init`, set remote to `https://github.com/tedzoe/AdoptViaAI.git`
+- Initial commit: 38 files, 7344 insertions — all Phase 1-5 source, docs, safety, MCP
+- Pushed to GitHub: `master` branch, tracking `origin/master`
+
+### Polish pass (previous session)
 
 - Fixed `_SafeGroup.invoke()` in `main.py` — added `except click.exceptions.Exit: raise`
   before `except Exception`. `click.exceptions.Exit` is a `RuntimeError` subclass (not
@@ -285,4 +296,4 @@ AdoptviaAI/
 
 ---
 
-*Last updated: 2026-05-24 — Polish pass complete. All 11 tasks done. All 7 validation commands pass.*
+*Last updated: 2026-05-24 — Polish pass complete. All 11 tasks done. Project published to GitHub (tedzoe/AdoptViaAI). All validation commands pass.*
