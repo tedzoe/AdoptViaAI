@@ -1,8 +1,8 @@
 # AdoptviaAI
 
-**AI adoption done right** — a CCA-F portfolio project demonstrating Claude API expertise across all seven certification domains.
+**AI adoption done right** — A CCA-F portfolio project demonstrating Claude API expertise across the core certification domains, organized into five implementation phases.
 
-`avai` is a fully-featured CLI built with Python, Click, and Rich that shows real-world Claude API patterns: prompt caching, agentic tool use, multi-agent orchestration, Model Context Protocol (MCP), and safety guardrails. All five phases are complete and working.
+`avai` is a fully-featured CLI built with Python, Click, and Rich that shows real-world Claude API patterns: prompt caching, agentic tool use, multi-agent orchestration, Model Context Protocol (MCP), and safety guardrails.
 
 ---
 
