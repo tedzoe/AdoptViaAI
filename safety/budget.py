@@ -44,35 +44,32 @@ _ENV_MAX_RPM: int   = int(os.getenv("AVAI_MAX_RPM", "60"))
 # estimation purposes.
 _PRICING: dict[str, dict[str, float]] = {
     # Haiku — cheapest, used for development
-    "claude-haiku-4-5": {
-        "input":  1.00,
-        "output": 5.00,
+    # Keep in sync with core/cost_tracker.py PRICING table (full versioned IDs).
+    "claude-haiku-4-5-20251001": {
+        "input":  0.80,
+        "output": 4.00,
     },
     # Sonnet — balanced quality/cost
-    "claude-sonnet-4-6": {
+    "claude-sonnet-4-20250514": {
         "input":  3.00,
         "output": 15.00,
     },
     # Opus — highest quality
-    "claude-opus-4-6": {
-        "input":  5.00,
-        "output": 25.00,
-    },
-    "claude-opus-4-7": {
-        "input":  5.00,
-        "output": 25.00,
+    "claude-opus-4-20250514": {
+        "input":  15.00,
+        "output": 75.00,
     },
 }
 
 # Friendly short-names mapped to full model IDs (mirrors core/client.py)
 _MODEL_ALIASES: dict[str, str] = {
-    "haiku":  "claude-haiku-4-5",
-    "sonnet": "claude-sonnet-4-6",
-    "opus":   "claude-opus-4-6",
+    "haiku":  "claude-haiku-4-5-20251001",
+    "sonnet": "claude-sonnet-4-20250514",
+    "opus":   "claude-opus-4-20250514",
 }
 
 # Fallback pricing when the model is not in the table
-_FALLBACK_PRICING = {"input": 5.00, "output": 25.00}  # conservative (opus rate)
+_FALLBACK_PRICING = {"input": 15.00, "output": 75.00}  # conservative (opus rate)
 
 
 # ── Helper ─────────────────────────────────────────────────────────────────────

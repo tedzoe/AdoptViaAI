@@ -15,8 +15,9 @@ from safety.budget import BudgetEnforcer, BudgetExceededError, _token_cost
 
 class TestTokenCost:
     def test_haiku_cost_is_cheap(self):
-        cost = _token_cost(1_000_000, 0, "claude-haiku-4-5")
-        assert cost == pytest.approx(1.00)
+        # Use the shortname alias; haiku input is $0.80/MTok
+        cost = _token_cost(1_000_000, 0, "haiku")
+        assert cost == pytest.approx(0.80)
 
     def test_output_tokens_cost_more_than_input(self):
         input_cost = _token_cost(1_000_000, 0, "haiku")
@@ -73,7 +74,7 @@ class TestBudgetEnforcerRecord:
     def test_record_returns_call_cost(self):
         enforcer = BudgetEnforcer(max_usd=1.00, max_rpm=60)
         cost = enforcer.record(1_000_000, 0, "haiku")
-        assert cost == pytest.approx(1.00)  # haiku input price is $1.00/MTok
+        assert cost == pytest.approx(0.80)  # haiku input price is $0.80/MTok
 
     def test_reset_clears_state(self):
         enforcer = BudgetEnforcer(max_usd=1.00, max_rpm=60)
@@ -87,8 +88,8 @@ class TestBudgetEnforcerRecord:
 class TestBudgetEnforcerWarnThreshold:
     def test_warn_threshold_fires_once(self):
         enforcer = BudgetEnforcer(max_usd=1.00, max_rpm=60, warn_at_pct=0.80)
-        # Spend 85% of budget
-        enforcer.record(input_tokens=850_000, output_tokens=0, model="haiku")
+        # Haiku input is $0.80/MTok; 1.1M tokens = $0.88 = 88% of $1.00 budget
+        enforcer.record(input_tokens=1_100_000, output_tokens=0, model="haiku")
         assert enforcer.warn_threshold_reached() is True
         # Second call should return False (already fired)
         assert enforcer.warn_threshold_reached() is False

@@ -22,6 +22,7 @@ setup(
         "click>=8.0.0",
         "python-dotenv>=1.0.0",
         "rich>=13.0.0",
+        "mcp[cli]>=1.0.0",
     ],
     entry_points={
         "console_scripts": [
