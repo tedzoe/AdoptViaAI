@@ -11,7 +11,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="adoptviaai",
-    version="0.1.0",
+    version="0.5.0",
     description="AdoptviaAI — AI adoption done right. CCA-F portfolio CLI.",
     author="AdoptviaAI",
     python_requires=">=3.10",
